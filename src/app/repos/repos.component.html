@@ -1,0 +1,71 @@
+<md-input-container >
+  <input mdInput type="search" id="search" placeholder="Search repo" (input)="getSearch($event)" >
+  <i class="material-icons md-icon dp48 search">search</i>
+</md-input-container>
+
+<div class="total" *ngIf="total">
+	<h4>Finded repositories: <span>{{total}}</span> </h4>
+	<strong class="onpage">On page: {{onPage}}</strong>
+</div>
+<md-spinner *ngIf="isSpinner" class="center mat-spinner"></md-spinner>
+<div class="sort-holder" *ngIf="total">
+	<span >Sort by:</span>
+	<div class="btn-group">
+	  <label class="btn btn-default" [(ngModel)]="sortBy" uncheckable btnRadio="watchers" ngDefaultControl >Watchers</label>
+	  <label class="btn btn-default" [(ngModel)]="sortBy" uncheckable btnRadio="stargazers_count" ngDefaultControl>Stars</label>
+	  <label class="btn btn-default" [(ngModel)]="sortBy" uncheckable btnRadio="forks" ngDefaultControl>Forks</label>
+	</div>
+</div>
+<div class="card-holder" *ngIf="!error?.message">
+	<md-card class="repo-card" *ngFor="let item of repo | repoSort:sortBy"> <!-- | repoSort:sortBy -->
+	    <md-card-header>
+	        <div md-card-avatar class="avatar">
+	        	<a [href]="item.owner.html_url" target="_blank">
+	        		<img md-card-image [src]="item.owner.avatar_url">
+	        	</a>
+	        </div>
+	        <div class="repo-info">
+	        	<md-card-title><h3>{{item.name}}</h3></md-card-title>
+	        	<md-card-subtitle>{{item.pushed_at | date:'medium'}}</md-card-subtitle>
+	        </div>
+	    </md-card-header>
+	    <md-card-content>
+	        <dl>
+	        	<dt>Git:</dt>
+	        	<dd>{{item.git_url}}</dd>
+	        </dl>
+	        <dl>
+	        	<dt>Https:</dt>
+	        	<dd>{{item.clone_url}}</dd>
+	        </dl>
+	        <dl>
+	        	<dt>SSH:</dt>
+	        	<dd>{{item.ssh_url}}</dd>
+	        </dl>
+	        <dl>
+	        	<dt>Link:</dt>
+	        	<dd><a [href]="item.html_url" target="_blank">{{item.html_url}}</a></dd>
+	        </dl>
+	    </md-card-content>
+	    <md-card-footer>
+	        <span class="gh-text">watchers: <strong>{{item.watchers}}</strong></span>
+	        <span class="gh-text">forks: <strong>{{item.forks}}</strong></span>
+	        <span class="gh-text">stars: <strong>{{item.stargazers_count}}</strong></span>
+	    </md-card-footer>
+	</md-card>
+</div>
+<div class="error">
+	<h2>{{error?.message}}</h2>
+	<strong><a [href]="error?.documentation_url" target="_blank">{{error?.documentation_url}}</a></strong>
+</div>
+<pagination *ngIf="total"
+	class="pagination-sm"
+	[totalItems]="total" 
+	[(ngModel)]="bigCurrentPage" 
+	[maxSize]="maxSize" 
+	[boundaryLinks]="true"
+	[rotate]="false" 
+	(numPages)="numPages = $event"
+	(pageChanged)="pageChanged($event)">
+</pagination>
+

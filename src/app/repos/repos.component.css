@@ -1,0 +1,128 @@
+.mat-input-container {
+	width: 100%;
+}
+.card-holder {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: row wrap;
+}
+
+.repo-card {
+	width: 350px;
+	margin: 0 10px 20px;
+	padding: 15px;
+	align-self: flex-start;
+}
+
+.mat-card-header {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: auto;
+}
+.repo-info {
+	flex: 1 1 0;
+	word-break: break-word;
+}
+.avatar {
+	width: 80px;
+    height: 80px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.mat-card-image:first-child{
+	margin: 0;
+}
+.mat-card-image {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0;
+}
+
+.mat-card-content {
+	margin-bottom: 40px;
+}
+
+.repo-url {
+	display: block;
+	margin-bottom: 5px;
+	word-break: break-word;
+}
+
+.mat-card-footer {
+	padding: 15px;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.total {
+	overflow: hidden;
+	width: 100%;
+	margin: 10px 0 20px;
+}
+
+.total h4 {
+	margin: 0 0 5px;
+}
+
+b {
+	color: #f7c709;
+}
+
+h4 > span {
+	color: #33aa55;
+}
+
+.mat-input-infix {
+	padding-right: 30px;
+}
+
+.material-icons.search{
+	position: absolute;
+	top: -2px;
+	right: 0;
+}
+
+.sort-holder {
+	margin-bottom: 20px;
+}
+
+dl {
+	overflow: hidden;
+	width: 100%;
+	word-break: break-word;
+}
+dt {
+	float: left;
+}
+dd {
+	float: right;
+	width: 85%;
+}
+
+dd a {
+	color: #33aa55;
+}
+dd a:hover {text-decoration: none;}
+
+.error {
+	text-align: center;
+}
+
+.error h2 {
+	color: #ff0000;
+}
+
+.error a:hover {text-decoration: none;}

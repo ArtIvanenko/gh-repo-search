@@ -1,0 +1,25 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.logo {
+	width: 280px;
+    height: auto;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+h2 {
+	text-align: center;
+	margin: 0 0 10px;
+}
+
+.mat-spinner svg {
+	stroke: #33aa55;
+	fill: #33aa55;
+}
+
