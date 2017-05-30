@@ -21,10 +21,11 @@ export class ReposComponent implements OnInit {
 	public isSpinner: boolean;
     public onPage: number;
     public currentPage: number = 1;
-    public maxSize:number = 5;
-    private inputEl: string;
-    private error: Array<ErrorResponce>;
-    private BASE_URL: string = 'https://api.github.com/search/repositories';
+    public maxSize:number = 8;
+    public inputEl: string;
+    public sortBy: string;
+    //public error: Array<ErrorResponce>;
+    public BASE_URL: string = 'https://api.github.com/search/repositories';
 
     public sequence$: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 
@@ -66,14 +67,15 @@ export class ReposComponent implements OnInit {
         this._http.get(this.BASE_URL + `?q=${this.inputEl}&page=${event.page}`)
             .map((res: Response) => { 
                 return res.json();
-            }).catch((error:any) => {
-                this.error = JSON.parse( error._body);
-                return Observable.throw(error || 'Server error');
+            }).catch((_error:any) => {
+                //this.error = JSON.parse( _error._body);
+                //console.log('this.error ', this.error);
+                return Observable.throw(_error || 'Server error');
             }).do((responce) => {
                 this.repo = responce['items'];
                 this.total = responce['total_count'];
                 this.onPage = responce['items'].length;
-                this.error = [];
+                //this.error = [];
             }).subscribe();
     }
 

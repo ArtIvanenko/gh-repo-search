@@ -18,5 +18,5 @@ type Owner = {
 
 type ErrorResponce = {
 	message: string,
-	docs: string
+	documentation_url: string
 }
