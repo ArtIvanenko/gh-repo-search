@@ -82,7 +82,7 @@ b {
 }
 
 h4 > span {
-	color: #33aa55;
+	color: #673ab7;
 }
 
 .mat-input-infix {
@@ -113,7 +113,7 @@ dd {
 }
 
 dd a {
-	color: #33aa55;
+	color: #673ab7;
 }
 dd a:hover {text-decoration: none;}
 

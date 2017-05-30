@@ -2,12 +2,11 @@
   <input mdInput type="search" id="search" placeholder="Search repo" (input)="getSearch($event)" >
   <i class="material-icons md-icon dp48 search">search</i>
 </md-input-container>
-
 <div class="total" *ngIf="total">
 	<h4>Finded repositories: <span>{{total}}</span> </h4>
 	<strong class="onpage">On page: {{onPage}}</strong>
 </div>
-<md-spinner *ngIf="isSpinner" class="center mat-spinner"></md-spinner>
+<md-spinner mode="indeterminate" *ngIf="isSpinner" class="center mat-spinner"></md-spinner>
 <div class="sort-holder" *ngIf="total">
 	<span >Sort by:</span>
 	<div class="btn-group">
@@ -16,7 +15,7 @@
 	  <label class="btn btn-default" [(ngModel)]="sortBy" uncheckable btnRadio="forks" ngDefaultControl>Forks</label>
 	</div>
 </div>
-<div class="card-holder" > <!-- *ngIf="!error?.message" -->
+<div class="card-holder" *ngIf="!isError">
 	<md-card class="repo-card" *ngFor="let item of repo | repoSort:sortBy">
 	    <md-card-header>
 	        <div md-card-avatar class="avatar">
@@ -54,10 +53,10 @@
 	    </md-card-footer>
 	</md-card>
 </div>
-<!-- <div class="error">
+<div class="error" *ngIf="isError">
 	<h2>{{error?.message}}</h2>
 	<strong><a [href]="error?.documentation_url" target="_blank">{{error?.documentation_url}}</a></strong>
-</div> -->
+</div>
 <pagination *ngIf="total"
 	class="pagination-sm"
 	[totalItems]="total" 
@@ -68,4 +67,3 @@
 	(numPages)="numPages = $event"
 	(pageChanged)="pageChanged($event)">
 </pagination>
-

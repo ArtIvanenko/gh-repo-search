@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject';
@@ -24,8 +24,9 @@ export class ReposComponent implements OnInit {
     public maxSize:number = 8;
     public inputEl: string;
     public sortBy: string;
-    //public error: Array<ErrorResponce>;
-    public BASE_URL: string = 'https://api.github.com/search/repositories';
+    public error: Array<ErrorResponce>;
+    public isError: boolean = false;
+    private BASE_URL: string = 'https://api.github.com/search/repositories';
 
     public sequence$: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 
@@ -38,6 +39,7 @@ export class ReposComponent implements OnInit {
     }
 
     public ngOnInit() {
+
     	this.sequence$
         	.debounceTime(500)
         	.map( (event: KeyboardEvent) => {
@@ -68,16 +70,19 @@ export class ReposComponent implements OnInit {
             .map((res: Response) => { 
                 return res.json();
             }).catch((_error:any) => {
-                //this.error = JSON.parse( _error._body);
-                //console.log('this.error ', this.error);
+
+                this.error = JSON.parse( _error._body);
+                this.isError = true;
                 return Observable.throw(_error || 'Server error');
-            }).do((responce) => {
+
+            }).subscribe((responce) => {
+
                 this.repo = responce['items'];
                 this.total = responce['total_count'];
                 this.onPage = responce['items'].length;
-                //this.error = [];
-            }).subscribe();
+                this.isError = false;
+
+            });
     }
 
 }
-
